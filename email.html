@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!--<title> Email Validation in JavaScript | CodingLab </title>-->
+    <link rel="stylesheet" href="style.css">
+    <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+     /* Google Font CDN Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins" , sans-serif;
+}
+body{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(#4671EA,#AC34E7);
+  padding: 0 20px;
+}
+form{
+  max-width: 550px;
+  width: 100%;
+  background: #fff;
+  padding: 30px;
+  border-radius: 4px;
+}
+form .input-box{
+  display: flex;
+  height: 55px;
+  align-items: center;
+  position: relative;
+}
+.input-box input{
+  height: 100%;
+  outline: none;
+  border: 2px solid #bfbfbf;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 0 45px;
+  transition: all 0.3s ease;
+}
+.input-box input.input{
+  width: 75%;
+  margin-right: 20px;
+}
+form.valid .input-box input.input{
+  border-color: #4671EA;
+}
+.input-box input.input:focus{
+  border-color: #4671EA;
+}
+form.error input.input{
+  border-color: #de0611;
+}
+.input-box input.button{
+  width: 25%;
+  padding: 0;
+  color: #fff;
+  background: #4671EA;
+  border: none;
+  cursor: pointer;
+}
+.input-box input.button:hover{
+  background: #1748cf;
+}
+.input-box i{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+}
+.input-box i.email-icon{
+  color: #bfbfbf;
+  left: 15px;
+  transition: all 0.3s ease;
+}
+form.valid i.email-icon{
+  color: #1748cf;
+}
+.input-box input.input:focus ~ i.email-icon{
+  color: #1748cf;
+}
+.input-box .error-icon,
+.input-box .passed-icon{
+  color: #de0611;
+  left: calc(75% - 60px);
+  display: none;
+}
+form.error .error-icon{
+  display: block;
+}
+.input-box .passed-icon{
+  color: #1748cf;
+}
+form.valid .passed-icon{
+  display: block;
+}
+form .text{
+  color: #de0611;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 10px 0 -10px 2px;
+}
+form.valid .text{
+  color: #1748cf;
+}
+
+</style>   
+</head>
+<body>
+  <form action="#">
+    <div class="input-box">
+      <input class="input" type="text" placeholder="Enter your email">
+      <i class="fas fa-envelope email-icon"></i>
+      <i class="fas fa-exclamation-circle error-icon"></i>
+      <i class="fas fa-check-circle passed-icon"></i>
+      <input class="button" type="submit" value="Check">
+    </div>
+    <p class="text"></p>
+  </form>
+  <script>
+  //getting all attribute
+  const form = document.querySelector("form"),
+  eInput = form.querySelector(".input"),
+  text = form.querySelector(".text");
+
+  form.addEventListener("submit", (e)=>{
+    e.preventDefault(); //preventing form from submitting
+    let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/; //Regex pattern to validate email
+    form.classList.add("error");
+    form.classList.remove("valid");
+    if(eInput.value == ""){
+      text.innerText = "Email can't be blank";
+    }else if (!eInput.value.match(pattern) ) { //if patter is not matched with user's enter value
+      text.innerText = "Please enter a valid email";
+    }else{
+      form.classList.replace("error" , "valid"); //replacing error class with valid class
+      text.innerText = "This is a valid email";
+    }
+  });
+  </script>
+</body>
+</html>
